@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--  Подключение локального bootstrap-->
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+
+    <title>Магазин</title>
+    <!-- добавление фрагмента общего содержимого тега head -->
+<!--    <th:block th:replace="layout/page-layout.html :: common-head-content"/>-->
+</head>
+<body>
+<!--&lt;!&ndash; добавление фрагмент шапки &ndash;&gt;-->
+<!--<th:block th:replace="layout/page-layout.html :: page-header(page='index')"/>-->
+
+<!--<a th:href="@{/company}">Работа с компаниями</a>-->
+<!--<a th:href="@{/vacancy}">Работа с вакансиями</a>-->
+
+<!--&lt;!&ndash; пример использования статичной картинки &ndash;&gt;-->
+<!--<img th:src="@{/images/some-image.jpeg}">-->
+
+<!--&lt;!&ndash; добавление фрагмента футера &ndash;&gt;-->
+<!--<th:block th:replace="layout/page-layout.html :: page-footer"/>-->
+<h1 >все работает</h1>
+
+<a class="d-block "  th:href="@{/clients}">Работа с клиентами</a>
+<a class="d-block "  th:href="@{/clients/7}">Клиент</a>
+<a class=" d-block"  th:href="@{/clients/update/8}">Редактирование</a>
+<a class="d-block "  th:href="@{/clients/new-client}">Добавление клиента</a>
+<a class="d-block "  th:href="@{/image}">Работа с постерами</a>
+<a class="d-block "  th:href="@{/clients}">Работа с клиентами</a>
+<hr>
+
+<a th:href="@{/product}" class="btn btn-secondary">Список  товаров</a>
+
+<a class="d-block " th:href="@{/product/update/3}" >Изменить товар</a>
+<!--<a class="d-block " th:href="@{/product/delete/7" class="btn btn-secondary">Удалить товар</a>-->
+
+
+</body>
+</html>

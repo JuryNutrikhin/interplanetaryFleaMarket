@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление изображния</title>
+</head>
+<body>
+
+<div class="container text-center ">
+<!--  <form method="post" th:action="@{/image/new}" enctype="multipart/form-data">-->
+      <form method="post" th:action="@{/image/new}" enctype="multipart/form-data">
+    <!-- форму с использованием bootstrap -->
+
+    <div class="mb-3 row">
+      <label class="col-sm-2 col-form-label" for="image">Изабражение</label>
+      <div class="col-sm-10">
+        <input class="col-form-label col-sm-2" type="file" id="image" name="image">
+      </div>
+    </div>
+
+    <!-- кнопка -->
+
+    <div class="mb-3 row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-5">
+        <button class="btn btn-secondary form-control">Сохранить</button>
+      </div>
+
+      <div class="col-sm-5">
+        <a th:href="@{/image}" class="btn-secondary btn form-control">Отменить</a>
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--  Подключение локального bootstrap-->
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+
+    <meta charset="UTF-8">
+    <title>Товары</title>
+</head>
+<body>
+
+<div class="container text-center table-bordered">
+    <h1>Список товаров</h1>
+
+    <p th:if="${errorMessage != null}" class="alert alert-danger">
+        [[${errorMessage}]]
+    </p>
+
+    <p th:if="${successMessage != null}" class="alert alert-success">
+        [[${successMessage}]]
+    </p>
+
+    <table class="table table-striped border-secondary">
+
+        <tr th:if="${products == null}">
+            <td colspan="4"> Нет записей в таблице</td>
+        </tr>
+
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Наименование товара</th>
+            <th scope="col">Страна</th>
+            <th scope="col">Жанр</th>
+            <th scope="col">Дата создания</th>
+            <th scope="col">Количество на складе</th>
+            <th scope="col">Цена за штуку</th>
+            <th scope="col">Постер</th>
+            <th scope="col">Действие</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="producted : ${products}">
+                <th scope="row">[[${producted.id}]]</th>
+                <td>[[${producted.productName}]]</td>
+                <td>[[${producted.productCountry}]]</td>
+                <td>[[${producted.genre}]]</td>
+                <td>[[${producted.productDateCreate}]]</td>
+                <td>[[${producted.productCount}]]</td>
+                <td>[[${producted.productPrice}]]</td>
+                <td  height="25">[[${producted.productFoto}]]</td>
+                <td>
+                    <a th:href="@{'/product/' + ${producted.id}}" class="btn btn-secondary">Смотреть</a>
+                    <a th:href="@{'/product/update/' + ${producted.id}}" class="btn btn-secondary">Изменить</a>
+                    <a th:href="@{'/product/delete/' + ${producted.id}}" class="btn btn-secondary">Удалить</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="m-auto">
+        <a type="submit" class="btn btn-secondary" th:href="@{product/new-product}">
+            Добавить товар
+        </a>
+    </div>
+
+</div>
+
+
+</body>
+</html>
