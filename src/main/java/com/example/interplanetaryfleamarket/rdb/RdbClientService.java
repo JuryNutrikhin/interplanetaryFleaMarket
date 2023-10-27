@@ -1,6 +1,7 @@
 package com.example.interplanetaryfleamarket.rdb;
 
 import com.example.interplanetaryfleamarket.entity.Client;
+import com.example.interplanetaryfleamarket.entity.User;
 import com.example.interplanetaryfleamarket.rdb.repository.ClientRepository;
 import com.example.interplanetaryfleamarket.servise.ClientService;
 import lombok.RequiredArgsConstructor;
@@ -56,5 +57,22 @@ public class RdbClientService implements ClientService {
         }
 
     }
+
+    @Override
+    public Integer findIdClientByUser(Optional<User> user) {//поиск id Client по id User
+
+//        return Optional.of(user.getClient().getId());
+        return  user.get().getClient().getId();
+    }
+
+    @Override
+    public Client findClientByUser(Optional<User> user) {
+        return user.get().getClient();
+    }
+
+//    @Override
+//    public Iterable<Client> findAllById(Integer id) {
+//        return null;//возможно не надо
+//    }
 
 }

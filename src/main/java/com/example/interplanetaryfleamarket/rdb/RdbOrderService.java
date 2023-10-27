@@ -1,5 +1,6 @@
 package com.example.interplanetaryfleamarket.rdb;
 
+import com.example.interplanetaryfleamarket.entity.Client;
 import com.example.interplanetaryfleamarket.entity.Order;
 import com.example.interplanetaryfleamarket.rdb.repository.OrderRepository;
 import com.example.interplanetaryfleamarket.servise.OrderService;
@@ -20,6 +21,11 @@ public class RdbOrderService implements OrderService {
     @Override
     public Optional<Order> findById(Integer id) {
         return orderRepository.findById(id);
+    }
+
+    @Override
+    public Iterable<Order> findAllByClientId(Integer clientId) {
+        return orderRepository.findAllByClientId(clientId);
     }
 
     @Override
@@ -46,4 +52,11 @@ public class RdbOrderService implements OrderService {
             return Optional.empty();
         }
     }
+
+    @Override
+    public Iterable<Order> findAllByClient(Client client) {
+        return orderRepository.findAllByClient(client);
+    }
+
+
 }

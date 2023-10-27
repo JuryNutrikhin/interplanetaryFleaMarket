@@ -22,27 +22,7 @@ public class ImageController {
 
     private  final ImageService imageService;
 
-//    @GetMapping("")
-//    public String findAll(Model model){
-//        Iterable<Image> images = imageService.findAll();
-//        model.addAttribute("images", images);
-//        return "image/image-list";
-//    }
 
-//    @GetMapping("new")
-//    public String addNew(){
-//        return "image/image-form";
-//    }
-
-//    @PostMapping("new")
-//    public String addNew(@RequestParam MultipartFile multipartFile ) throws IOException{
-//
-//        String imageData = Base64.getEncoder().encodeToString(multipartFile.getBytes());
-//        Image newImage = new Image();
-//        newImage.setData(imageData);
-//        imageService.add(newImage);
-//        return "redirect:/image";
-//    }
 
     @GetMapping("")
     public String findAll(Model model) {

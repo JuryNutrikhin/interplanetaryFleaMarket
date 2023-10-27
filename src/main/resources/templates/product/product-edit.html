@@ -2,142 +2,92 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Редактирование товара</title>
-    <!-- -----------------------CSS------------------------- -->
-    <!--  Подключение локального bootstrap-->
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <th:block th:replace="layout/page-layout.html :: head-content "/>
+
 </head>
 
-<body>
-<div class="container">
-    <div class="container">
+<body class="main container">
+<div class="container row">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex col mb-2 mb-lg-0">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Поиск">
-                        <button class="btn btn-outline-success me-2" type="submit">Поиск</button>
-                        <!--<button type="button" class="btn btn-primary">Sign-up</button>-->
-                    </form>
-                    <div class="text-end">
-                        <button type="button" class="btn btn-primary me-2">Корзина</button>
-                        <button type="button" class="btn btn-primary " data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Войти
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
+    <!-- Добавление панель админ -->
+    <th:block th:replace="layout/page-layout.html :: nav-admin"/>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
 
-                    <div class="modal-header p-5 pb-4 border-bottom-0">
-                        <h1 class="fw-bold mb-0 fs-2">Sign up for free</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="container col">
+
+        <th:block th:replace="layout/page-layout.html :: nav-page"/>
+
+
+        <h3 class="mb-3">Редактирование товара</h3>
+
+        <!--        <form class="p-5 m-5" method="post" th:action="@{'/product/update/' + ${product.getId()}}"-->
+        <!--              th:object="${}">-->
+        <
+        <form class=" m-5" method="post" th:action="@{'/product/update/' + ${product.id}}"
+              th:object="${product}" enctype="multipart/form-data">
+
+            <div class="row g-3 mb-5">
+                <div class="row">
+                    <div class="mb-2 col-sm-4">
+                        <label type="image" class="form-label"> Постер </label>
+                        <img alt="Image" th:src="@{'data:image/jpeg;base64,' + ${product.image.data}}" height="100">
+
                     </div>
 
-                    <div class="modal-body p-5 pt-0">
-                        <form class="">
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control rounded-3" id="floatingInput"
-                                       placeholder="name@example.com">
-                                <label for="floatingInput">Email address</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control rounded-3" id="floatingPassword"
-                                       placeholder="Password">
-                                <label for="floatingPassword">Password</label>
-                            </div>
-                            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign
-                                up
-                            </button>
-                            <small class="text-body-secondary">By clicking Sign up, you agree to the terms of
-                                use.</small>
-
-
-                        </form>
+                    <div class="mb-3 col-sm-4">
+                        <label for="productName" class="form-label"> Наименование товара</label>
+                        <input type="text" class="form-control" id="productName"
+                               th:field="*{productName}">
                     </div>
-
-                </div>
-            </div>
-        </div>
-
-        <h5 class="text-center">Редактирование товара</h5>
-
-        <form class="p-5 m-5" method="post" th:action="@{'/product/update/' + ${product.getId()}}"
-              th:object="${product}">
-
-            <div class="row g-3 mb-6">
-
-                <div class="col-sm-6 ">
-                    <label for="productName" class="form-label"> Наименование товара</label>
-                    <input type="text" class="form-control" id="productName"
-                           th:field="*{productName}">
                 </div>
 
-                <div class="col-sm-6">
+                <div class="mb-3">
                     <label for="description" class="form-label">Описание товара</label>
-                    <input type="text" class="form-control" id="description"
-                           th:field="*{description}">
+                    <!--                    <input type="text" class="form-control" id="description" style="height: 100px"-->
+                    <!--                           th:field="*{description}">-->
+                    <textarea class="form-control"
+                              placeholder="Опишите фильм"
+                              id="description"
+                              style="height: 100px"
+
+                              th:field="*{description}"
+                    >
+								</textarea>
                 </div>
 
-                <div class="col-sm-6">
-                    <label for="productCountry" class="form-label">Описание товара</label>
-                    <input type="text" class="form-control" id="productCountry" min="1" maxlength="5000"
-                           th:field="*{productCountry}">
+                <!--                <div class="col-sm-6">-->
+                <!--                    <label for="productCountry" class="form-label">Страна</label>-->
+                <!--                    <input type="text" class="form-control" id="productCountry" min="1" maxlength="5000"-->
+                <!--                           th:field="*{productCountry}">-->
+                <!--                </div>-->
+                <div class="mb-3">
+                    <label for="productCountry" class="form-label">Страна производитель</label>
+                    <input type="text" class="form-control" id="productCountry"
+                           placeholder="Введите страну" required
+                           th:field="*{productCountry}"
+                    >
                 </div>
 
-                <div class="col-sm-6">
-                    <label for="productCount" class="form-label">Количество товара на складе</label>
-                    <input type="number" class="form-control" id="productCount"
-                           th:field="*{productCount}">
+                <!--                <div class="col-sm-6">-->
+                <!--                    <label for="productCount" class="form-label">Количество товара на складе</label>-->
+                <!--                    <input type="number" class="form-control" id="productCount"-->
+                <!--                           th:field="*{productCount}">-->
+                <!--                </div>-->
+                <div class="mb-3">
+                    <label for="productCount" class="form-label">Количеcтво штук</label>
+                    <input type="number"
+                           class="form-control"
+                           id="productCount"
+                           th:field="*{productCount}"
+                    >
                 </div>
 
                 <div class="form">
-                    <label for="productFoto" class="form-label">Постер</label>
+                    <label for="logo" class="form-label">Постер</label>
                     <input type="file"
                            class="form-control"
-                           id="productFoto"
-                           placeholder=""
-                           th:field="*{productFoto}"
+                           id="logo"
+                           name="logoImage"
                     >
                 </div>
 
@@ -159,7 +109,7 @@
                            th:field="*{productDateCreate}">
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     <label for="productPrice" class="form-label">Цена за шт</label>
                     <input type="number" class="form-control" id="productPrice"
                            th:field="*{productPrice}">
@@ -167,19 +117,25 @@
 
             </div>
 
-            <div class="row">
-                <div class="col-sm-2"></div>
+            <div class="row m-5 text-center">
+
+                <!--                <div class="col-sm-2"></div>-->
+
                 <div class="col-sm-5">
-                    <button type="submit" class="btn btn-secondary form-control">Сохранить</button>
+                    <button type="submit" class="w-50 btn btn-secondary form-control">Сохранить</button>
                 </div>
 
-
                 <div class="col-sm-5">
-                    <a th:href="@{/product}" type="submit" class="btn btn-secondary form-control">Отменить</a>
+                    <a th:href="@{/product}" type="submit" class="w-50 btn btn-secondary form-control">Отменить</a>
                 </div>
             </div>
 
         </form>
+
+
+        <!-------------------------------------FOOTER------------------------------------->
+
+        <th:block th:replace="layout/page-layout.html :: footer-page"/>
 
 
     </div>

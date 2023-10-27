@@ -1,40 +1,111 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
-    <!--  Подключение локального bootstrap-->
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <th:block th:replace="layout/page-layout.html :: head-content "/>
 
-    <title>Магазин</title>
-    <!-- добавление фрагмента общего содержимого тега head -->
-<!--    <th:block th:replace="layout/page-layout.html :: common-head-content"/>-->
 </head>
-<body>
-<!--&lt;!&ndash; добавление фрагмент шапки &ndash;&gt;-->
-<!--<th:block th:replace="layout/page-layout.html :: page-header(page='index')"/>-->
 
-<!--<a th:href="@{/company}">Работа с компаниями</a>-->
-<!--<a th:href="@{/vacancy}">Работа с вакансиями</a>-->
+<body class="main col">
 
-<!--&lt;!&ndash; пример использования статичной картинки &ndash;&gt;-->
-<!--<img th:src="@{/images/some-image.jpeg}">-->
+<!--заголовок-->
 
-<!--&lt;!&ndash; добавление фрагмента футера &ndash;&gt;-->
-<!--<th:block th:replace="layout/page-layout.html :: page-footer"/>-->
-<h1 >все работает</h1>
+<th:block th:replace="layout/page-layout.html :: nav-admin"/>
+<div class="container block1 col">
+    <div class="container text-center table-bordered">
+        <th:block th:replace="layout/page-layout.html :: nav-page"/>
 
-<a class="d-block "  th:href="@{/clients}">Работа с клиентами</a>
-<a class="d-block "  th:href="@{/clients/7}">Клиент</a>
-<a class=" d-block"  th:href="@{/clients/update/8}">Редактирование</a>
-<a class="d-block "  th:href="@{/clients/new-client}">Добавление клиента</a>
-<a class="d-block "  th:href="@{/image}">Работа с постерами</a>
-<a class="d-block "  th:href="@{/clients}">Работа с клиентами</a>
-<hr>
+    <!-----------------------------Блок 1-------------------------------->
 
-<a th:href="@{/product}" class="btn btn-secondary">Список  товаров</a>
 
-<a class="d-block " th:href="@{/product/update/3}" >Изменить товар</a>
-<!--<a class="d-block " th:href="@{/product/delete/7" class="btn btn-secondary">Удалить товар</a>-->
+    <section id="landings" class="container text-center  mt-2 mt-md-4 mt-lg-5 pb-5">
+
+
+
+     <div>
+         <div>
+             <p th:if="${errorMessage != null}" class="alert alert-danger">
+                 [[${errorMessage}]]
+             </p>
+             <!-- успешное сообщение -->
+             <p th:if="${successMessage != null}" class="alert alert-success">
+                 [[${successMessage}]]
+             </p>
+         </div>
+
+
+         <h2 class="h1 pt-2 pt-lg-0">FilmLex</h2>
+
+         <p class="fs-lg pb-2 pb-md-3 pb-lg-0 mb-4 mb-lg-5 text-secondary">Фильмы и сериалы</p>
+
+         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
+             <div th:if="${products == null}">
+                 <div class="col-4 text-secondary"> Нет записей</div>
+             </div>
+
+             <div th:each="product : ${products}"
+                  class="col card-hover  bg-none position-relative mb-4 mb-lg-5 card-film">
+
+                 <img th:src="@{'data:image/jpeg;base64,' + ${product.image.data}}" class=" img-logo b-block border rounded-3 shadow-sm img-logo"  alt="" >
+
+
+                 <h3 class="h5 mt-4 mb-3 mb-lg-0">
+                     <a th:href="@{'/product/' + ${product.id}}"
+                        class="d-flex justify-content-center align-items-center stretched-link text-secondary">[[${product.productName}]]</a>
+
+                 </h3>
+             </div>
+
+
+         </div>
+         <!--пагинация-->
+<!--         <div class="mx-auto pb-5">-->
+<!--             <nav aria-label="" class="">-->
+<!--                 <ul class="pagination justify-content-center">-->
+<!--                     <li class="page-item disabled">-->
+<!--                         <span class="page-link">Previous</span>-->
+<!--                     </li>-->
+<!--                     <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                     <li class="page-item active" aria-current="page">-->
+<!--                         <span class="page-link">2</span>-->
+<!--                     </li>-->
+<!--                     <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                     <li class="page-item">-->
+<!--                         <a class="page-link" href="#">Next</a>-->
+<!--                     </li>-->
+<!--                 </ul>-->
+<!--             </nav>-->
+<!--         </div>-->
+     </div>
+
+    </section>
+        <!-------------------------------------FOOTER------------------------------------->
+
+        <th:block th:replace="layout/page-layout.html :: footer-page"/>
+
+
+
+</div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 
 
 </body>
+
 </html>

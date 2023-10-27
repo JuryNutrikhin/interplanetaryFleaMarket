@@ -12,4 +12,7 @@ public interface ProductService {
     Optional<Product> add(Product product);
     Optional<Product> deleteById(Integer id);
     Optional<Product> updateById(Integer id,Product product);
+
+    Iterable<Product> getProductGenre(String genre);
+    Iterable<Product> getProductString(String string);
 }

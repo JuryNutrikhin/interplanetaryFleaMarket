@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="layout/page-layout.html :: head-content "/>
+
+</head>
+<body class="main row">
+
+<!-- Добавление панель админ -->
+<th:block th:replace="layout/page-layout.html :: nav-admin"/>
+
+<div class="container col">
+
+
+    <div class="container text-center table-bordered col">
+
+        <th:block th:replace="layout/page-layout.html :: nav-page"/>
+
+<!-------------------------------------------------------------------------------->
+<!--блоск1-->
+        <h1> Список заказов</h1>
+        <p th:if = "${errorMessage != null}" class="alert-danger alert">
+            [[${errorMessage}]]
+        </p>
+
+        <p th:if="${successMessage != null}" class="alert alert-success">
+            [[${successMessage}]]
+        </p>
+
+        <table class="table table-striped border-secondary">
+
+            <tr th:if="${orders ==null}">
+                <td colspan="12" class="text-center h3"  >Нет записей в таблице</td>
+            </tr>
+
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Id(Клиент)/Имя Клиента</th>
+                <th scope="col">Id(Товар)/Название товара</th>
+                <th scope="col">Количество</th>
+                <th scope="col">Дата заказа</th>
+                <th scope="col">Статус оплаты</th>
+                <th scope="col">Действие</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="orderted : ${orders}">
+
+                <th scope="row">[[${orderted.id}]]</th>
+                <td>[[${orderted.client.id}]] / [[${orderted.client.clientName}]]</td>
+                <td>[[${orderted.product.id}]] / [[${orderted.product.productName}]]</td>
+                <td>[[${orderted.count}]]</td>
+                <td>[[${orderted.orderData}]]</td>
+
+
+                <td th:if="!${orderted.getPayment()}" class="text-danger">Заказ не оплачен</td>
+                <td th:if="${orderted.getPayment()}" class="text-success">Заказ обробатывается</td>
+
+                <td>
+                    <a th:href="@{'/order/basket/' + ${orderted.client.id}}" class="btn btn-secondary">Смотреть</a>
+<!--                    <a th:href="@{'/order/update/' + ${orderted.id}}" class="btn btn-secondary">Изменить</a>-->
+                    <a th:href="@{'/order/delete/' + ${orderted.id}}" class="btn btn-secondary">Удалить</a>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+
+        <!-------------------------------------FOOTER------------------------------------->
+
+        <th:block th:replace="layout/page-layout.html :: footer-page"/>
+
+
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+</script>
+</body>
+</html>

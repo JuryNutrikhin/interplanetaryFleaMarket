@@ -8,4 +8,8 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends CrudRepository<Product,Integer> {
     Optional<Product> findByProductName(String name);
+
+    Iterable<Product> findAllByGenre(String genre);
+
+
 }

@@ -1,13 +1,17 @@
 package com.example.interplanetaryfleamarket.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Table(name = "client_t")
 public class Client {
@@ -30,8 +34,5 @@ public class Client {
     private LocalDate registration;
 
 
-
-    @OneToMany(mappedBy = "client")
-    private Set<Order> orders;
 
 }

@@ -1,78 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!--  Подключение локального bootstrap-->
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <th:block th:replace="layout/page-layout.html :: head-content "/>
 
-    <meta charset="UTF-8">
-    <title>Client</title>
 </head>
-<body>
+<body class="main">
+<!--<div class="container row">-->
+<!-- Добавление панель админ -->
+<th:block th:replace="layout/page-layout.html :: nav-admin"/>
+<div class="container">
+
+    <div class="container col text-center table-bordered">
+
+        <th:block th:replace="layout/page-layout.html :: nav-page"/>
 
 
-<!------------------------------------------------------------------>
+        <h1> Список Пользователей</h1>
+        <p th:if="${errorMessage != null}" class="alert alert-danger">
+            [[${errorMessage}]]
+        </p>
+        <p th:if="${ successMessage!= null}" class="alert alert-success">
+            [[${successMessage}]]
+        </p>
 
-<div class="container text-center table-bordered">
-    <h1> Список Пользователей</h1>
-    <p th:if ="${errorMessage != null}" class="alert alert-danger">
-        [[${errorMessage}]]
-    </p>
-    <p th:if="${ successMessage!= null}" class="alert alert-success">
-        [[${successMessage}]]
-    </p>
+        <table class="table table-striped ">
 
-    <table class="table table-striped ">
+            <tr th:if="${clients == null}">
+                <td colspan="4">Нет записей таблицы</td>
+            </tr>
 
-        <tr th:if="${clients == null}">
-            <td colspan="4">Нет записей таблицы</td>
-        </tr>
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Имя пользователя</th>
+                <th scope="col">Email</th>
+                <th scope="col">Адрес</th>
+                <th scope="col">Дата регистрации</th>
+                <th scope="col">Действие</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        <thead class="table-dark">
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Имя пользователя</th>
-            <th scope="col">Email</th>
-            <th scope="col">Адрес</th>
-            <th scope="col">Дата регистрации</th>
-            <th scope="col">Действие</th>
-        </tr>
-        </thead>
-        <tbody>
+            <tr th:each="cliented: ${clients}">
+                <th scope="row">[[${cliented.id}]]</th>
+                <td>[[${cliented.clientName}]]</td>
+                <td>[[${cliented.clientEmail}]]</td>
+                <td>[[${cliented.clientAddress}]]</td>
+                <td>[[${cliented.registration}]]</td>
+                <td class="d-flex">
+                    <a th:href="@{'/clients/' + ${cliented.id}}" class="btn btn-secondary me-2">Смотреть</a>
+                    <a th:href="@{'/clients/update/' +${cliented.id}}" class="btn btn-secondary me-2"> Изменить</a>
+                    <a th:href="@{'/clients/delete/' + ${cliented.id}}" class=" btn btn-secondary ">Удалить</a>
+                </td>
 
-        <tr th:each="cliented: ${clients}">
-            <th scope="row">[[${cliented.id}]]</th>
-            <td>[[${cliented.clientName}]]</td>
-            <td>[[${cliented.clientEmail}]]</td>
-            <td>[[${cliented.clientAddress}]]</td>
-            <td>[[${cliented.registration}]]</td>
-            <td>
-                <a th:href="@{'/clients/' + ${cliented.id}}" class="btn btn-secondary">Смотреть</a>
-                <a th:href="@{'/clients/update/' +${cliented.id}}" class="btn btn-secondary"> Изменить</a>
-                <a th:href="@{'/clients/delete/' + ${cliented.id}}" class=" btn btn-secondary" >Удалить</a>
-            </td>
-
-        </tr>
+            </tr>
 
 
-        </tbody>
-    </table>
-<!--    <div class="input-group">-->
-<!--        <div>-->
-<!--            <a th:href="@{clients/new-client}" class="btn btn-secondary form-control  m-auto"> Добавить-->
-<!--                пользователя </a>-->
-<!--        </div>-->
-<!--    </div>-->
-    <div class="m-auto">
-        <a type="submit" class="btn btn-secondary " th:href="@{clients/new-client}">Добавить
-            пользователя</a>
+            </tbody>
+        </table>
+        <!--    <div class="input-group">-->
+        <!--        <div>-->
+        <!--            <a th:href="@{clients/new-client}" class="btn btn-secondary form-control  m-auto"> Добавить-->
+        <!--                пользователя </a>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <div class="m-auto">
+            <a type="submit" class="btn btn-secondary " th:href="@{clients/new-client}">Добавить
+                пользователя</a>
+        </div>
+
+        <!--    <div th:if="${clients == null}">-->
+        <!--        <td>-->
+        <!--            Нет записей в таблице-->
+        <!--        </td>-->
+        <!-------------------------------------FOOTER------------------------------------->
+
+
     </div>
-
-<!--    <div th:if="${clients == null}">-->
-<!--        <td>-->
-<!--            Нет записей в таблице-->
-<!--        </td>-->
-
-    </div>
+    <th:block th:replace="layout/page-layout.html :: footer-page"/>
 </div>
+
 </body>
 </html>

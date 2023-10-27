@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <th:block th:replace="layout/page-layout.html :: head-content "/>
+
+</head>
+
+<body class="row main container mx-auto">
+
+<!-- Добавление панель админ -->
+<th:block th:replace="layout/page-layout.html :: nav-admin"/>
+
+
+<!--заголовок-->
+
+
+<div class="container col">
+    <div class="container">
+    <th:block th:replace="layout/page-layout.html :: nav-page"/>
+
+    <!-----------------------------Блок 1-------------------------------->
+
+    <div class="row justify-content-around align-items-center mb-4 my-5 pt-5">
+
+
+        <div class="col-12 col-md-5 order-md-2 mb-5 mb-md-0">
+            <span class="title-decorative">Жанр фильма: [[${productId.genre}]]</span>
+            <h5 class="h1">[[${productId.productName}]]</h5>
+            <p class="lead">
+                [[${productId.description}]]
+       </p>
+
+            <p class="lead">Страна : [[${productId.productCountry}]]</p>
+            <p class="lead">Год создания : [[${productId.productDateCreate}]]</p>
+            <p class="lead">Цена(руб) : [[${productId.productPrice}]]</p>
+<!--            <a th:href="@{/order/add(productId= ${productId.id},clientId = ${clientId} ) }"  class="btn  btn-secondary">В корзину</a>-->
+
+
+<!--            <a th:href="@{/order/add(productId=${productId.id},userLogin=${#authentication.getPrincipal().getUsername()})}" class="btn  btn-secondary">В корзину</a>-->
+            <a th:href="@{/order/add(productId=${productId.id})}" class="btn  btn-secondary">В корзину</a>
+
+
+        </div>
+
+        <!--end of col-->
+        <div class="col-12 col-md-5 order-md-1">
+            <a href="#">
+                <img alt="Image" th:src="@{'data:image/jpeg;base64,' + ${productId.image.data}}" class="img-fluid shadow">
+            </a>
+        </div>
+        <!--end of col-->
+    </div>
+
+    <th:block th:replace="layout/page-layout.html :: footer-page"/>
+    </div>
+
+</div>
+<!-------------------------------------FOOTER------------------------------------->
+
+
+
+
+
+
+
+
+</body>
+
+</html>

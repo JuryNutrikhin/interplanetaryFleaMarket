@@ -3,7 +3,6 @@ package com.example.interplanetaryfleamarket.controller.clientController;
 
 import com.example.interplanetaryfleamarket.entity.Client;
 import com.example.interplanetaryfleamarket.servise.ClientService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,14 +31,14 @@ public class ClientController {
         } else {
             model.addAttribute("clients", null);
         }
-        return "clients/client-list";                        //вернуть представление
+        return "/clients/client-list";                        //вернуть представление
     }
 
     @GetMapping("new-client")
     public String addClient(Model model) {
         Client client = new Client();// обьект для заполнения
         model.addAttribute("client", client);
-        return "clients/client-form";
+        return "/clients/client-form";
     }
 
     @PostMapping("new-client")
@@ -77,7 +76,7 @@ public class ClientController {
         } else {
             model.addAttribute("client", null);
         }
-        return "clients/clients-details";
+        return "/clients/clients-details";
     }
 //Редактирование клиента
 
@@ -90,7 +89,7 @@ public class ClientController {
             model.addAttribute("client", null);
 
         }
-        return "clients/client-edit";
+        return "/clients/client-edit";
     }
 
     @PostMapping("update/{id}")

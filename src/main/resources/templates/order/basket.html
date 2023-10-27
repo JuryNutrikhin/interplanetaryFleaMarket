@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:width="http://www.w3.org/1999/xhtml">
+
+<head>
+    <th:block th:replace="layout/page-layout.html :: head-content "/>
+
+</head>
+
+<body class="main row">
+
+<!--заголовок-->
+
+
+<div class=" row">
+
+    <!-- Добавление панель админ -->
+    <th:block th:replace="layout/page-layout.html :: nav-admin"/>
+
+
+    <!-----------------------------Блок 1-------------------------------->
+    <div class="container col">
+        <div class="container col">
+            <th:block th:replace="layout/page-layout.html :: nav-page"/>
+
+            <div th:if="${client == null}" class="px-5">
+                <div class="d-flex flex-column align-items-center py-5">
+                    <span class="display-6 pb-5">В корзине нет товаров</span>
+                    <a th:href="home" class="btn btn-outline-primary ">Вернуться к покупкам</a>
+                </div>
+            </div>
+
+            <div th:if="${client != null}" class="row mx-auto col-8">
+
+                <div class="col-md-4  mb-4 my-5 pt-5 m-auto">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Ваша корзина</span>
+                        <!--                    <span class="badge badge-secondary badge-pill">3</span>-->
+                    </h4>
+
+                </div>
+
+
+                <table class="table table-striped ">
+
+
+                    <thead class="">
+                    <tr>
+                        <th scope="col">Название фильма</th>
+                        <th scope="col">Цена(руб)</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="order : ${clientOrders}">
+                        <!--                        <th scope="row">[[${order.getProduct.getProductName}]]</th>-->
+                        <td>[[${order.getProduct.getProductName}]]</td>
+                        <td th:if="!${order.getPayment()}" class="text-danger">Заказ не оплачен</td>
+                        <td th:if="${order.getPayment()}" class="text-success">Заказ обробатывается</td>
+                        <td>[[${order.product.productPrice}]]</td>
+                        <td>
+                            <a th:href="@{'/order/delete/' + ${order.id}}" class="text-secondary">Удалить</a>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>Итого (РУБЛЕЙ)</td>
+                        <td></td>
+                        <td><strong>[[${count}]]</strong></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <form class="card p-2">
+                    <div class="input-group">
+                        <!--<input type="text" class="form-control" placeholder="Промо код">-->
+                        <div class="m-auto">
+                            <a th:href="@{'/order/status/'+${client.id}}" class="btn btn-secondary ">Оплатить</a>
+                        </div>
+                    </div>
+                </form>
+
+
+                <!-------------------------------------FOOTER------------------------------------->
+
+                <th:block th:replace="layout/page-layout.html :: footer-page"/>
+            </div>
+
+        </div>
+
+    </div>
+<!--</div>-->
+</div>
+
+</body>
+
+</html>

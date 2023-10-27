@@ -4,8 +4,10 @@ import com.example.interplanetaryfleamarket.entity.Product;
 import com.example.interplanetaryfleamarket.rdb.repository.ProductRepository;
 import com.example.interplanetaryfleamarket.servise.ProductService;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 @Service
@@ -49,14 +51,31 @@ public class RdbProductService implements ProductService {
         if(updated.isPresent() &&
                 (duplicatedByNameProduct.isEmpty())|| Objects.equals(duplicatedByNameProduct.get().getId(),id)){
             product.setId(id);
+            product.setImage(updated.get().getImage());//добавление изображения
             return Optional.of(productRepository.save(product)); // сохраняем новый данные
         }else{
         return Optional.empty();
         }
     }
 
-//    @Override
-//    Optional<Product> findByName(String name){
-//
-//    }
+    @Override
+    public Iterable<Product> getProductGenre(String genre) {
+        return productRepository.findAllByGenre(genre);
+    }
+
+
+    @Override
+    public Iterable<Product> getProductString(String string) {
+        string = string.toLowerCase();
+        var products = productRepository.findAll();
+        var filteredProduct = new ArrayList<Product>();
+        for (Product product: products){
+            if(product.getProductName().toLowerCase().contains(string) ||
+                    product.getGenre().toLowerCase().contains(string)){
+                filteredProduct.add(product);
+            }
+        }
+        return filteredProduct;
+    }
+
 }
