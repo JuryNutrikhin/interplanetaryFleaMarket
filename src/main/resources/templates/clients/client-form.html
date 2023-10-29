@@ -7,7 +7,7 @@
 </head>
 
 <body class="main ">
-<th:block th:replace="layout/page-layout.html :: nav-admin"/>
+<th:block th:replace="layout/page-layout.html :: nav-admin(page='/clients/new-client')"/>
 
 <div class="container row me-auto ">
 
@@ -22,7 +22,7 @@
 
         <!-------------------------------Блок--------------------------------->
         <div class="m-auto ">
-            <form class=" col-md-6  mb-4 my-5 pt-5 m-auto" method="post" th:action="@{clients/new-client}"
+            <form class=" col-md-6  mb-4 my-5 pt-5 m-auto" method="post" th:action="@{/clients/new-client}"
                   th:object="${client}"> <!--1.30.18 минута -->
 
 
@@ -62,7 +62,7 @@
 
 
                     <div class="col-sm-3">
-                        <a th:href="@{clients}" type="submit" class="btn btn-secondary form-control">Отменить</a>
+                        <a th:href="@{/clients}" type="submit" class="btn btn-secondary form-control">Отменить</a>
                     </div>
 
                     <div class="col"></div>

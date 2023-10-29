@@ -7,7 +7,7 @@
 <body class="main">
 <!--<div class="container row">-->
 <!-- Добавление панель админ -->
-<th:block th:replace="layout/page-layout.html :: nav-admin"/>
+<th:block th:replace="layout/page-layout.html :: nav-admin(page='/clients')"/>
 <div class="container">
 
     <div class="container col text-center table-bordered">
@@ -50,7 +50,9 @@
                 <td class="d-flex">
                     <a th:href="@{'/clients/' + ${cliented.id}}" class="btn btn-secondary me-2">Смотреть</a>
                     <a th:href="@{'/clients/update/' +${cliented.id}}" class="btn btn-secondary me-2"> Изменить</a>
-                    <a th:href="@{'/clients/delete/' + ${cliented.id}}" class=" btn btn-secondary ">Удалить</a>
+                    <a th:href="@{'/clients/delete/' + ${cliented.id}}" class="btn btn-secondary me-2 ">Удалить</a>
+                    <a  th:href="@{'/order/basket/' + ${cliented.id}} " class="btn btn-secondary me-2">Корзина</a>
+
                 </td>
 
             </tr>

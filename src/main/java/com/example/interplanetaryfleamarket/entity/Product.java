@@ -27,7 +27,10 @@ Product {
     @Column(name = "product_name_f", nullable = false)
     private String productName;
 
-    @Column(name = "description_f", nullable = false)
+//    @Column(name = "description_f", nullable = false)
+//    @Column(name = "description_f", nullable = false)
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
     private String description;
 
 

@@ -20,7 +20,7 @@
     <!-----------------------------Блок 1-------------------------------->
     <div class="container col">
         <div class="container col">
-            <th:block th:replace="layout/page-layout.html :: nav-page"/>
+            <th:block th:replace="layout/page-layout.html :: nav-page(page='/order/basket')"/>
 
             <div th:if="${client == null}" class="px-5">
                 <div class="d-flex flex-column align-items-center py-5">

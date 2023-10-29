@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
 
 </head>
@@ -66,7 +66,7 @@
 
 <!--                для админа кнопка корзина скрыта-->
 
-                <a sec:authorize="hasRole('USER')" th:href="@{/order/basket/-1} " class="text-secondary btn ">Корзина</a>
+                <a th:classappend="${page=='/order/basket'? 'active': ''}" sec:authorize="hasRole('USER')" th:href="@{/order/basket/-1} " class="text-secondary btn ">Корзина</a>
 
                 <!-- вывод имени аутентифированного пользователя -->
 
@@ -115,7 +115,7 @@
             <ul class="nav nav-pills flex-column mb-auto">
 
                 <li class="nav-item">
-                    <a th:href="@{/}" class="nav-link " aria-current="page">
+                    <a th:classappend="${page=='/'? 'active': ''}" th:href="@{/}" class="nav-link " aria-current="page">
                         <!--            <svg class="bi me-2" width="16" height="16">-->
                         <!--                <use xlink:href="#home"></use>-->
                         <!--            </svg>-->
@@ -125,7 +125,7 @@
                 </li>
 
                 <li>
-                    <a th:href="@{/clients}" class="nav-link link-dark">
+                    <a th:classappend="${page=='/clients'? 'active': ''}" th:href="@{/clients}" class="nav-link link-dark">
                         <!--            <svg class="bi me-2" width="16" height="16">-->
                         <!--                <use xlink:href="#speedometer2"></use>-->
                         <!--            </svg>-->
@@ -134,36 +134,31 @@
                     </a>
                 </li>
 
-                <li>
-<!--                    <a th:href="@{clients/new-client}" class="nav-link link-dark">-->
-                        <a th:href="@{/clients/new-client}" class="nav-link link-dark">
-                        Добавление  User
-                    </a>
-                </li>
+
 
                 <li>
-                    <a th:href="@{/product}" class="nav-link link-dark">
+                    <a th:classappend="${page=='/product'? 'active': ''}" th:href="@{/product}" class="nav-link link-dark">
                         <font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">Товары</font></font>
                     </a>
                 </li>
 
                 <li>
-                    <a th:href="@{/product/new-product}" class="nav-link link-dark">
+                    <a th:classappend="${page=='/product/new-product'? 'active': ''}" th:href="@{/product/new-product}" class="nav-link link-dark">
                         <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Добавить
                             товары</font></font>
                     </a>
                 </li>
 
                 <li>
-                    <a th:href="@{/order}" class="nav-link link-dark">
+                    <a th:classappend="${page=='/order'? 'active': ''}" th:href="@{/order}" class="nav-link link-dark">
                         <font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">Заказы</font></font>
                     </a>
                 </li>
 
                 <li>
-                    <a th:href="@{/register}" class="nav-link link-dark">
+                    <a th:classappend="${page=='/register'? 'active': ''}" th:href="@{/register}" class="nav-link link-dark">
                         <font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">Регистрация</font></font>
                     </a>
